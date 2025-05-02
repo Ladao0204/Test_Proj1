@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1e3a8a; /* Dark blue background */
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 p-6">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center bg-blue-800 p-4 text-white rounded-lg shadow-md mb-6">
+    <div class="text-xl font-bold">Lost & Found</div>
+    <div class="space-x-6">
+      <a href="home.html" class="hover:underline">Home</a>
+      <a href="result.html" class="hover:underline">Result</a>
+      <a href="notification.html" class="underline font-semibold">Notification</a>
+    </div>
+  </nav>
+
+  <!-- Title -->
+  <h1 class="text-3xl font-bold text-center text-white mb-8">Notifications</h1>
+
+  <!-- Notification Cards -->
+  <div id="notificationContainer" class="space-y-6">
+    <!-- Example Notification -->
+    <div class="bg-white text-blue-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      <h2 class="text-xl font-semibold">New Item Found: Wallet</h2>
+      <p>Location: Library</p>
+      <p>Status: FOUND</p>
+      <p class="text-sm text-gray-500">Reported by: James King</p>
+      <p class="text-sm text-gray-500">Time: 9:45 AM</p>
+    </div>
+
+    <!-- Another Notification -->
+    <div class="bg-white text-blue-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      <h2 class="text-xl font-semibold">New Item Returned: Phone</h2>
+      <p>Location: Cafeteria</p>
+      <p>Status: RETURNED</p>
+      <p class="text-sm text-gray-500">Reported by: Linda Ray</p>
+      <p class="text-sm text-gray-500">Time: 8:30 AM</p>
+    </div>
+  </div>
+
+  <script>
+    // You can add additional JavaScript for notifications if necessary
+  </script>
+
+</body>
+</html>

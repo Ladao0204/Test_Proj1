@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1e3a8a; /* Dark blue background */
+      color: white;
+    }
+    #itemsContainer {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 p-6">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center bg-blue-800 p-4 text-white rounded-lg shadow-md mb-6">
+    <div class="text-xl font-bold">Lost & Found</div>
+    <div class="space-x-6">
+      <a href="home.html" class="hover:underline">Home</a>
+      <a href="result.html" class="underline font-semibold">Result</a>
+      <a href="notification.html" class="hover:underline">Notification</a>
+    </div>
+  </nav>
+
+  <!-- Title -->
+  <h1 class="text-3xl font-bold text-center text-white mb-8">Lost & Found Items</h1>
+
+  <!-- Search Bar -->
+  <div class="flex justify-center mb-6">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search lost item..."
+      class="p-3 w-full md:w-1/2 lg:w-1/3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      onkeyup="filterItems()"
+    />
+  </div>
+
+  <!-- Items Container -->
+  <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Example Items -->
+    <div class="item-card bg-white text-blue-900 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer" onclick="showDetails('Wallet', 'Library', 'James King', '9:45 AM', 'FOUND', 'https://www.astridleather.com/wp-content/uploads/2016/11/photo_2021-02-09_14-22-44.jpg')">
+      <img src="https://www.astridleather.com/wp-content/uploads/2016/11/photo_2021-02-09_14-22-44.jpg" class="w-16 h-16 object-cover rounded-lg mb-4 mx-auto" />
+      <div class="text-center">
+        <h2 class="font-semibold text-lg">Wallet</h2>
+        <p class="text-sm">Location: Library</p>
+        <p class="text-sm text-green-500">Status: FOUND</p>
+      </div>
+    </div>
+
+    <div class="item-card bg-white text-blue-900 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer" onclick="showDetails('Phone', 'Cafeteria', 'Linda Ray', '8:30 AM', 'RETURNED', 'https://www.zdnet.com/a/img/resize/e9794c8e2b8a9a9173f0b1f496406d551f6e80b5/2023/08/22/8c939452-01fe-4087-a469-c902c577f0a1/asus-zenfone-10-in-hand.jpg?auto=webp&fit=crop&height=900&width=1200')">
+      <img src="https://www.zdnet.com/a/img/resize/e9794c8e2b8a9a9173f0b1f496406d551f6e80b5/2023/08/22/8c939452-01fe-4087-a469-c902c577f0a1/asus-zenfone-10-in-hand.jpg?auto=webp&fit=crop&height=900&width=1200" class="w-16 h-16 object-cover rounded-lg mb-4 mx-auto" />
+      <div class="text-center">
+        <h2 class="font-semibold text-lg">Phone</h2>
+        <p class="text-sm">Location: Cafeteria</p>
+        <p class="text-sm text-yellow-500">Status: RETURNED</p>
+      </div>
+    </div>
+
+    <div class="item-card bg-white text-blue-900 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer" onclick="showDetails('Keys', 'Gym', 'Zane Miles', '7:50 AM', 'PENDING', 'https://www.hallslocksmiths.co.uk/wp-content/uploads/Copy-of-Unnamed-Design-7-1080x628.png')">
+      <img src="https://www.hallslocksmiths.co.uk/wp-content/uploads/Copy-of-Unnamed-Design-7-1080x628.png" class="w-16 h-16 object-cover rounded-lg mb-4 mx-auto" />
+      <div class="text-center">
+        <h2 class="font-semibold text-lg">Keys</h2>
+        <p class="text-sm">Location: Gym</p>
+        <p class="text-sm text-gray-500">Status: PENDING</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+    <div class="bg-white p-6 rounded-lg w-80 text-blue-900 relative">
+      <button class="absolute top-2 right-3 text-red-600" onclick="closeModal()">✕</button>
+      <img id="modalImg" src="" alt="Item image" class="w-full h-40 object-cover rounded mb-4" />
+      <h2 id="modalTitle" class="text-xl font-bold"></h2>
+      <p id="modalLoc" class="text-sm"></p>
+      <p id="modalReporter" class="text-sm"></p>
+      <p id="modalTime" class="text-sm"></p>
+      <p id="modalStatus" class="text-sm font-semibold mt-2"></p>
+    </div>
+  </div>
+
+  <script>
+    function filterItems() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const items = document.querySelectorAll(".item-card");
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? "flex" : "none";
+      });
+    }
+
+    function showDetails(title, loc, reporter, time, status, img) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalLoc").innerText = "Location: " + loc;
+      document.getElementById("modalReporter").innerText = "Reported by: " + reporter;
+      document.getElementById("modalTime").innerText = "Time: " + time;
+      document.getElementById("modalStatus").innerText = "Status: " + status;
+      document.getElementById("modalImg").src = img;
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+  </script>
+
+</body>
+</html>
